@@ -1,38 +1,38 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" />
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank">Community Chat</a>
+    <h1>{{ msg }}</h1>   
+    <span v-if="seen"> Now you see me</span>
+    <ol>
+      <li v-for="todo in todos">
+        {{todo.text}}
       </li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li>
-        <a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a>
-      </li>
-      <li>
-        <a href="https://github.com/vuejs/awesome-vue" target="_blank"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+    </ol>
+    <button v-on:click="addTodos"> 增加 </button>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage"> Reverse Message </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "app",
+  methods: {
+    reverseMessage: function(){
+      this.message = this.message.split('').reverse().join('')
+    },
+    addTodos: function(){
+      this.todos.push({text: '新增'+this.todos.length})
+    },
+  },
   data() {
     return {
-      msg: "Welcome to Your Vue.js App -- myh"
+      seen: true,
+      msg: "测试",
+      todos: [
+      {text: '哈哈哈'},
+      {text: '嘿嘿嘿'}, 
+      {text: '嘻嘻嘻'}],
+      message: 'Hello Vue.js!',
     };
   }
 };
@@ -48,22 +48,21 @@ export default {
   margin-top: 60px;
 }
 
-h1,
-h2 {
+h1 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
   color: #42b983;
+}
+.dataitem {
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin: 6px;
+}
+.product {
+  text-align: center;
+}
+.product img {
+  height: 80px;
+  padding: 10px;
 }
 </style>
